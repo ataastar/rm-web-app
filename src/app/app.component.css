@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sidebar {
+  background-color: #f0f0f0;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.resizer {
+  width: 5px;
+  cursor: ew-resize;
+  background-color: #ccc;
+}
+
+.main {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.link {
+  display: block;
+  margin-bottom: 6px;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

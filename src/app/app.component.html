@@ -1,6 +1,16 @@
-<main class="main">
-  <branch-selector></branch-selector>
-  <requirement-tree-selector></requirement-tree-selector>
-</main>
+<div class="container">
+  <div class="sidebar" [ngStyle]="{ width: sidebarWidth + 'px' }">
+    <branch-selector></branch-selector>
+    <requirement-tree-selector></requirement-tree-selector>
+  </div>
+
+  <div class="resizer" (mousedown)="onMouseDown($event)"></div>
+
+  <div class="main">
+    <h1>Fő tartalom</h1>
+    <p>Több komponens is jöhet ide, hosszú tartalommal.</p>
+  </div>
+</div>
+
 
 <router-outlet />
