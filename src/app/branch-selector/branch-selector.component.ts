@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BranchTree } from '@ataastar/rm-api-ts-oa';
-import { BranchService } from '../branch.service';
+import { BranchService, BranchTree } from '@ataastar/rm-api-ts-oa';
 import { NgForOf } from '@angular/common';
 
 @Component({
@@ -22,7 +21,7 @@ export class BranchSelectorComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("BranchTreeComponent init");
-    this.branchTreeService.getBranchTree().subscribe(response => {
+    this.branchTreeService.branchTree().subscribe(response => {
       this.branches = response;
     });
   }
