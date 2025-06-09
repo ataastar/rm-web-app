@@ -19,11 +19,11 @@ export class RequirementTreeSelectorComponent implements OnInit {
   expandedNodes = new Set<number>();
 
   constructor(private requirementTreeService: RequirementService) {
-    console.log("RequirementNodeComponent constructor");
+    console.log("RequirementTreeSelectorComponent constructor");
   }
 
   ngOnInit(): void {
-    console.log("RequirementNodeComponent init");
+    console.log("RequirementTreeSelectorComponent init");
     this.requirementTreeService.allRequirementTree().subscribe(response => {
       this.requirements = response;
     });

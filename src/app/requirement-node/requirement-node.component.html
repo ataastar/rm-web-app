@@ -2,7 +2,7 @@
   <span (click)="toggle()" style="cursor: pointer;">
     {{ node.child?.length ? (isExpanded() ? '[-]' : '[+]') : '•' }}
   </span>
-  <a [routerLink]="['/requirement', node.requirementId]">{{ node.name }}</a>
+  <a [routerLink]="['/requirement-data', node.requirementId]" routerLinkActive="active">{{ node.name }}</a>
 
   <ul *ngIf="node.child?.length && isExpanded()">
     <ng-container *ngFor="let child of node.child">

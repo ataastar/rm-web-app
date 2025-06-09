@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Requirement, } from '@ataastar/rm-api-ts-oa';
 import { CommonModule, NgForOf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'requirement-node',
@@ -10,7 +10,8 @@ import { RouterLink } from '@angular/router';
   imports: [
     NgForOf,
     RouterLink,
-    CommonModule
+    CommonModule,
+    RouterLinkActive
   ],
   styleUrl: './requirement-node.component.css'
 })
