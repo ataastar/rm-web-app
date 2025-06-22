@@ -1,17 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { of, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
+import { RequirementProperty, RequirementService } from '@ataastar/rm-api-ts-oa';
+import { NgForOf, NgIf } from '@angular/common';
+
+interface PropertyGroup {
+  [key: string]: RequirementProperty[];
+}
 
 @Component({
   selector: 'app-requirement-detail',
   standalone: true,
   templateUrl: './requirement-detail.component.html',
+  imports: [
+    NgIf,
+    NgForOf
+  ]
 })
 export class RequirementDetailComponent implements OnInit {
   requirementId!: number;
-  data!: string;
+  properties: RequirementProperty[] | null = [];
+  propertyGroups: PropertyGroup = {};
+  propertyTypes: string[] = [];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private requirementService: RequirementService) {
   }
 
   ngOnInit(): void {
@@ -23,12 +35,33 @@ export class RequirementDetailComponent implements OnInit {
         })
       )
       .subscribe(result => {
-        this.data = result;
+        this.properties = result;
+        this.groupPropertiesByType();
       });
   }
 
-  loadDataFromServer(id: number) {
-    // Itt cseréld ki a saját HTTP service hívásodra
-    return of(`Szerverről betöltött adatok a(z) #${id} követelményhez`);
+  groupPropertiesByType(): void {
+    if (this.properties === null) {
+      return;
+    }
+    this.propertyGroups = this.properties.reduce((groups, prop) => {
+      const type = prop.type || 'other';
+      if (!groups[type]) {
+        groups[type] = [];
+      }
+      groups[type].push(prop);
+      return groups;
+    }, {} as PropertyGroup);
+
+    this.propertyTypes = Object.keys(this.propertyGroups);
   }
+
+  getPropertiesByType(type: string): RequirementProperty[] {
+    return this.propertyGroups[type] || [];
+  }
+
+  loadDataFromServer(id: number): Observable<RequirementProperty[]> {
+    return this.requirementService.getRequirementProperties(id);
+  }
+
 }
