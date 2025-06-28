@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { RequirementProperty, RequirementService } from '@ataastar/rm-api-ts-oa';
-import { NgForOf, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { PropertyCardComponent } from '../shared/property-card/property-card.component';
 
 interface PropertyGroup {
   [key: string]: RequirementProperty[];
@@ -13,8 +14,8 @@ interface PropertyGroup {
   standalone: true,
   templateUrl: './requirement-detail.component.html',
   imports: [
-    NgIf,
-    NgForOf
+    CommonModule,
+    PropertyCardComponent
   ]
 })
 export class RequirementDetailComponent implements OnInit {

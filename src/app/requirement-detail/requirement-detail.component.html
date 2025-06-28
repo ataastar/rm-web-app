@@ -1,160 +1,44 @@
-<div class="container mt-4">
-  <h2>Követelmény #{{ requirementId }}</h2>
+<div class="container-fluid px-0">
+  <h2>Requirement #{{ requirementId }}</h2>
 
   <div *ngIf="!properties" class="alert alert-info">
-    Betöltés szerverről...
+    Loading from server...
   </div>
 
-  <div *ngIf="properties" class="row">
-    <!-- Type Block -->
-    <div *ngIf="getPropertiesByType('type').length" class="col-md-6 mb-4">
-      <div class="card h-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">Típus</h5>
+  <div *ngIf="properties" class="w-100">
+    <!-- First Row: Type and Visible -->
+    <div class="row g-3 mb-3 mx-0">
+      <div *ngIf="getPropertiesByType('type').length" class="col-12 col-md-6">
+        <div class="h-100">
+          <app-property-card [properties]="getPropertiesByType('type')"></app-property-card>
         </div>
-        <div class="card-body">
-          <div *ngFor="let prop of getPropertiesByType('type')" class="mb-3">
-            <div class="d-flex justify-content-between">
-              <strong>Név:</strong>
-              <span>{{ prop.expressionName || 'Névtelen' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Azonosító:</strong>
-              <span>{{ prop.expressionId || 'N/A' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Érték:</strong>
-              <span class="text-break">{{ prop.stringValue || prop.numberValue || 'Nincs érték' }}</span>
-            </div>
-          </div>
+      </div>
+      <div *ngIf="getPropertiesByType('visible').length" class="col-12 col-md-6">
+        <div class="h-100">
+          <app-property-card [properties]="getPropertiesByType('visible')"></app-property-card>
         </div>
       </div>
     </div>
 
-    <!-- Visible Block -->
-    <div *ngIf="getPropertiesByType('visible').length" class="col-md-6 mb-4">
-      <div class="card h-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">Láthatóság</h5>
+    <!-- Second Row: Required and Editable -->
+    <div class="row g-3 mb-3">
+      <div *ngIf="getPropertiesByType('required').length" class="col-12 col-md-6">
+        <div class="h-100">
+          <app-property-card [properties]="getPropertiesByType('required')"></app-property-card>
         </div>
-        <div class="card-body">
-          <div *ngFor="let prop of getPropertiesByType('visible')" class="mb-3">
-            <div class="d-flex justify-content-between">
-              <strong>Név:</strong>
-              <span>{{ prop.expressionName || 'Névtelen' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Azonosító:</strong>
-              <span>{{ prop.expressionId || 'N/A' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Érték:</strong>
-              <span>{{ prop.stringValue || prop.numberValue || 'Nincs érték' }}</span>
-            </div>
-          </div>
+      </div>
+      <div *ngIf="getPropertiesByType('editable').length" class="col-12 col-md-6">
+        <div class="h-100">
+          <app-property-card [properties]="getPropertiesByType('editable')"></app-property-card>
         </div>
       </div>
     </div>
 
-    <!-- Length Block -->
-    <div *ngIf="getPropertiesByType('length').length" class="col-md-6 mb-4">
-      <div class="card h-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">Hossz</h5>
-        </div>
-        <div class="card-body">
-          <div *ngFor="let prop of getPropertiesByType('length')" class="mb-3">
-            <div class="d-flex justify-content-between">
-              <strong>Név:</strong>
-              <span>{{ prop.expressionName || 'Névtelen' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Azonosító:</strong>
-              <span>{{ prop.expressionId || 'N/A' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Érték:</strong>
-              <span>{{ prop.stringValue || prop.numberValue || 'Nincs érték' }}</span>
-            </div>
-          </div>
-        </div>
+    <!-- Third Row: Length (full width) -->
+    <div class="row mx-0">
+      <div *ngIf="getPropertiesByType('length').length" class="col-12">
+        <app-property-card [properties]="getPropertiesByType('length')"></app-property-card>
       </div>
     </div>
-
-    <!-- Required Block -->
-    <div *ngIf="getPropertiesByType('required').length" class="col-md-6 mb-4">
-      <div class="card h-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">Kötelező</h5>
-        </div>
-        <div class="card-body">
-          <div *ngFor="let prop of getPropertiesByType('required')" class="mb-3">
-            <div class="d-flex justify-content-between">
-              <strong>Név:</strong>
-              <span>{{ prop.expressionName || 'Névtelen' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Azonosító:</strong>
-              <span>{{ prop.expressionId || 'N/A' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Érték:</strong>
-              <span>{{ prop.stringValue || prop.numberValue || 'Nincs érték' }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Editable Block -->
-    <div *ngIf="getPropertiesByType('editable').length" class="col-md-6 mb-4">
-      <div class="card h-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">Szerkeszthető</h5>
-        </div>
-        <div class="card-body">
-          <div *ngFor="let prop of getPropertiesByType('editable')" class="mb-3">
-            <div class="d-flex justify-content-between">
-              <strong>Név:</strong>
-              <span>{{ prop.expressionName || 'Névtelen' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Azonosító:</strong>
-              <span>{{ prop.expressionId || 'N/A' }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Érték:</strong>
-              <span>{{ prop.stringValue || prop.numberValue || 'Nincs érték' }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Other Properties -->
-    <!--div *ngFor="let type of propertyTypes" class="col-md-6 mb-4"
-         *ngIf="!['type', 'visible', 'length', 'required', 'editable'].includes(type)">
-      <div class="card h-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">{{type | titlecase}}</h5>
-        </div>
-        <div class="card-body">
-          <div *ngFor="let prop of getPropertiesByType(type)" class="mb-3">
-            <div class="d-flex justify-content-between">
-              <strong>Név:</strong>
-              <span>{{prop.expressionName || 'Névtelen'}}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Azonosító:</strong>
-              <span>{{prop.expressionId || 'N/A'}}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <strong>Érték:</strong>
-              <span class="text-break">{{prop.stringValue || prop.numberValue || 'Nincs érték'}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div-->
   </div>
 </div>

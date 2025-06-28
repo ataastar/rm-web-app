@@ -21,9 +21,12 @@
 
 .main {
   flex: 1;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 20px;
   background-color: #fff;
+  width: 100%;
+  min-width: 0; /* This prevents flex items from overflowing */
 }
 
 .link {

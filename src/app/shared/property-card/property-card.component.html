@@ -1,0 +1,19 @@
+<div class="card h-100">
+  <div class="card-body p-2">
+    <table class="table table-borderless table-sm m-0">
+      <tbody>
+      <tr *ngFor="let prop of properties">
+        <td class="text-nowrap fw-medium pe-2" style="width: 40%;">
+          {{ prop.type }}:
+        </td>
+        <td class="text-break">
+          <span *ngIf="prop.expressionName">{{ prop.expressionName }}</span>
+          <span *ngIf="!prop.expressionName && (prop.stringValue || prop.numberValue)">
+              {{ prop.stringValue || prop.numberValue || '-' }}
+            </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
