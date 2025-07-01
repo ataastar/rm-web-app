@@ -4,6 +4,7 @@ import { Observable, switchMap } from 'rxjs';
 import { RequirementProperty, RequirementService } from '@ataastar/rm-api-ts-oa';
 import { CommonModule } from '@angular/common';
 import { PropertyCardComponent } from '../shared/property-card/property-card.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 interface PropertyGroup {
   [key: string]: RequirementProperty[];
@@ -15,7 +16,8 @@ interface PropertyGroup {
   templateUrl: './requirement-detail.component.html',
   imports: [
     CommonModule,
-    PropertyCardComponent
+    PropertyCardComponent,
+    NgbModule
   ]
 })
 export class RequirementDetailComponent implements OnInit {
